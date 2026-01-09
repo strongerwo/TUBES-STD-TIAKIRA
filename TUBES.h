@@ -1,75 +1,65 @@
 #ifndef TUBES_H_INCLUDED
 #define TUBES_H_INCLUDED
+
 #include <iostream>
+#include <string>
+#include <fstream>
 
 using namespace std;
+
+const int MAX_MATERI = 10;
 
 typedef struct elemenKursus *adrKursus;
 typedef struct elemenModul *adrModul;
 
-struct kursus {
+struct kursus{
     string kode;
     string judul;
     string level;
     int durasi;
 };
 
-struct modul {
+struct modul{
     string nama;
+    string materi[MAX_MATERI];
+    int jumlahMateri;
 };
 
-struct elemenKursus {
+struct elemenKursus{
     kursus info;
     adrKursus next;
     adrKursus prev;
     adrModul firstModul;
 };
 
-struct elemenModul {
+struct elemenModul{
     modul info;
     adrModul next;
     adrModul prev;
 };
 
-struct listKursus {
+struct listKursus{
     adrKursus first;
     adrKursus last;
 };
 
-
-void createListKursus(listKursus &L);
-adrKursus alokasiKursus(kursus x);
-void dealokasiKursus(adrKursus &P);
-void insertFirstKursus(listKursus &L, adrKursus P);
+void createList(listKursus &L);
+void clearList(listKursus &L);
+adrKursus createElemenKursus(kursus k);
+adrModul createElemenModul(modul m);
 void insertLastKursus(listKursus &L, adrKursus P);
-void insertAfterKursus(listKursus &L, adrKursus Prec, adrKursus P);
-void deleteFirstKursus(listKursus &L, adrKursus &P);
-void deleteLastKursus(listKursus &L, adrKursus &P);
-void deleteAfterKursus(listKursus &L, adrKursus Prec, adrKursus &P);
+void insertLastModul(adrKursus K, adrModul M);
 adrKursus findKursus(listKursus L, string kode);
-void showAllKursus(listKursus L);
-int countKursus(listKursus L);
-adrModul alokasiModul(modul x);
-void dealokasiModul(adrModul &P);
-void insertFirstModul(adrKursus P, adrModul M);
-void insertLastModul(adrKursus P, adrModul M);
-void insertAfterModul(adrKursus P, adrModul Prec, adrModul M);
-void deleteFirstModul(adrKursus P, adrModul &M);
-void deleteLastModul(adrKursus P, adrModul &M);
-void deleteAfterModul(adrKursus P, adrModul Prec, adrModul &M);
-adrModul findModul(adrKursus P, string nama);
-void showAllModul(adrKursus P);
-int countModul(adrKursus P);
-void connectModulToKursus(adrKursus K, modul dataModul);
-void disconnectModulFromKursus(adrKursus K, string namaModul);
-void showKursusWithModul(listKursus L);
-adrKursus findKursusMaxModul(listKursus L);
-adrKursus findKursusMinModul(listKursus L);
-int countKursusByLevel(listKursus L, string level);
-int countKursusByDuration(listKursus L, int minDur, int maxDur);
-void searchKursusByLevel(listKursus L, string level);
-void deleteAllModulFromKursus(adrKursus K);
-void deleteKursusWithModul(listKursus &L, string kode);
-float averageDurasiKursus(listKursus L);
+void updateKursus(listKursus &L, string kode, string judulBaru, string levelBaru, int durasiBaru);
+void deleteKursus(listKursus &L, string kode);
+void tampilModul(adrKursus K);
+void tampilKursus(listKursus L);
+void cariBerdasarkanLevel(listKursus L, string level);
+void cariBerdasarkanJudul(listKursus L, string judul);
+void cariDurasiKurang(listKursus L, int maxDurasi);
+int hitungPerLevel(listKursus L, string level);
+adrKursus kursusModulTerbanyak(listKursus L);
+adrKursus kursusModulTersedikit(listKursus L);
+void sortKursusByJumlahModul(listKursus &L);
 
 #endif // TUBES_H_INCLUDED
