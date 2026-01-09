@@ -1,0 +1,14 @@
+﻿
+# hasil build
+bin/
+obj/
+*.o
+*.exe
+
+# file IDE
+*.layout
+*.depend
+*.cbp
+
+# file coba-coba
+*.txt

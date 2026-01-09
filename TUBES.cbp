@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="TUBES.cpp" />
+		<Unit filename="TUBES.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
